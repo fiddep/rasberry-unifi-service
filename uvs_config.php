@@ -19,16 +19,9 @@ $uvs_wifissid       =   'SSID:';
 /* Optional changes */
 $uvs_folder         =   'unifi-voucher-service'; // If you want to rename your folder
 $uvs_printer        =   'QL-700'; // For more information about supported printers visit: https://pypi.org/project/brother_ql/
-$uvs_labelsize      =   '62x29'; // For more information about supported labels visit: https://pypi.org/project/brother_ql/
-$uvs_usbid          =   'file:///dev/usb/lp0'; // Remember your printer ID. To identify your printer at your usb-port type lsusb, as mention in step 5.
-$uvs_vlan           =   'RLGuest'; // Name of the wireless guest network
-
-$uvs_alternatives = [
-    ["name"=> "1 Day", "key" => "1dayfree", "url" => "codes/1-day-free.php"],
-    ["name"=> "3 Days", "key" => "3dayfree", "url" => "codes/3-day-free.php"],
-    ["name"=> "7 Days", "key" => "7dayfree", "url" => "codes/codes/1-week-free.php"],
-    ["name"=> "Kids", "key" => "kidsfree", "url" => "codes/kids-free.php"]
-];
+$uvs_labelsize      =   '62'; // For more information about supported labels visit: https://pypi.org/project/brother_ql/
+$uvs_usbid          =   'file:///dev/usb/lp4'; // Remember your printer ID. To identify your printer at your usb-port type lsusb, as mention in step 5.
+$uvs_vlan           =   'voucher'; // Name of the wireless guest network
 
 /* 1 day free */
 $uvs_1df_site_id    =   'default'; // The site where you want to create the voucher

@@ -49,18 +49,55 @@ require_once ('uvs_config.php');
             
             <form id="buttons">
                <div class="row" style="margin-bottom: 16px;">
-                  <?php foreach($uvs_alternatives as $alt): ?>
-                  <div class="col-lg-3 col-md-3 col-sm-3 gallery1st <?= $alt["key"]; ?>">
-                     <button class="button-free" onCLick="$.ajax({url:'<?= $alt["url"]; ?>',type:'GET',success:function(data){$('.print<?= $alt["key"]; ?>').html(data);}});" type="submit" id="<?= $alt["key"]; ?>">              
+                  <!--  1 day -->
+               <div class="row">
+                  <div class="col-lg-3 col-md-3 col-sm-3 gallery1st print1dayfree ">
+                     <button class="button-free" onCLick="$.ajax({url:'codes/1-day-free.php',type:'GET',success:function(data){$('.print1dayfree').html(data);}});" type="submit" id="1dayfree">              
                         <div id="oben">
-                           <img src="assets/img/printing.png" id="<?= $alt["key"]; ?>img" width="208px" class="img-responsive" />
+                           <img src="assets/img/printing.png" id="1dayfreeimg" width="208px" class="img-responsive" />
                         </div>
                         <div id="unten">
-                           <h3><?= $alt["name"]; ?></h3>
+                           <h3>1 Day</h3>
                         </div>
                      </button>
                   </div>
-                  <?php endforeach; ?>
+
+                  <!--  3 day -->
+                  <div class="col-lg-3 col-md-3 col-sm-3 gallery1st print1weekfree">
+                     <button class="button-free" onCLick="$.ajax({url: 'codes/3-day-free.php', type: 'GET', success: function(data){$('.print1weekfree').html(data);}});" type="submit" id="1weekfree">
+                        <div id="oben">
+                           <img src="assets/img/printing.png" id="3dayfreeimg" width="208px" class="img-responsive" />
+                        </div>
+                        <div id="unten">
+                           <h3>7 Day</h3>
+                        </div>
+                     </button>			
+                  </div>
+
+                  <!--  7 day -->
+                  <div class="col-lg-3 col-md-3 col-sm-3 gallery1st print1monthfree">
+                     <button class="button-free" onCLick="$.ajax({url: 'codes/1-week-free.php', type: 'GET', success: function(data){$('.print1monthfree').html(data);}});" type="submit" id="1monthfree">
+                        <div id="oben">
+                           <img src="assets/img/printing.png" id="7dayfreeimg" width="208px" class="img-responsive" />
+                        </div>
+                        <div id="unten">
+                           <h3>90 Day</h3>
+                        </div>
+                     </button>			
+                  </div>
+
+                  <!--  kids free -->
+                  <div class="col-lg-3 col-md-3 col-sm-3 gallery1st printkidsfree">
+                     <button class="button-kids" onCLick="$.ajax({url: 'codes/kids-free.php', type: 'GET', success: function(data){$('.printkidsfree').html(data);}});" type="submit" id="kidsfree">
+                        <div id="oben">
+                           <img src="assets/img/printing.png" id="kidsfreeimg" width="208px" class="img-responsive" />
+                        </div>
+                        <div id="unten">
+                           <h3>Kids</h3>
+                        </div>
+                     </button>			
+                  </div>
+               </div>
                </div>
             </form>
          </div>
@@ -68,7 +105,7 @@ require_once ('uvs_config.php');
       
       <script src="assets/js/jquery.min.js"></script>
       <script src="assets/js/bootstrap.min.js"></script>
-      <script>
+ <script>
       $(document).ready(function() {
         $("#buttons").submit(function(e) {
           e.preventDefault();
@@ -76,15 +113,17 @@ require_once ('uvs_config.php');
             $("#1weekfree").attr("disabled", true);
             $("#1monthfree").attr("disabled", true);
             $("#kidsfree").attr("disabled", true);
+
             return true;
           });
       });
 
       $(document).ready(function() {
         $('#1dayfreeimg').hide();$("#1dayfree").click(function(){$("#1dayfreeimg").show(); });
-        $('#3dayfreeimg').hide();$("#3dayfree").click(function(){$("#3dayfreeimg").show(); });
-        $('#7dayfreeimg').hide();$("#7dayfree").click(function(){$("#7dayfreeimg").show(); });
+        $('#3dayfreeimg').hide();$("#1weekfree").click(function(){$("#3dayfreeimg").show(); });
+        $('#7dayfreeimg').hide();$("#1monthfree").click(function(){$("#7dayfreeimg").show(); });
         $('#kidsfreeimg').hide();$("#kidsfree").click(function(){$("#kidsfreeimg").show(); });
+
       });
       </script>
    </body>

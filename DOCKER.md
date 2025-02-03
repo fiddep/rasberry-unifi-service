@@ -15,7 +15,10 @@ docker run -d -p 127.0.0.1:80:80 --device=/dev/usb/lp0 --privileged fiddep/unifi
 #### running on PI
 
 docker buildx build -t fiddep/unifi-voucher-service --progress plain --platform linux/arm/v7 .
-docker pull fiddep/unifi-voucher-service:latest && docker run -d -p 127.0.0.1:80:80 --device=/dev/usb/lp0 --restart=always --platform linux/arm/v7 --privileged fiddep/unifi-voucher-service:latest
+
+docker pull fiddep/unifi-voucher-service:latest && \
+docker stop <CONTAINER_ID> && \
+docker run -d -p 127.0.0.1:80:80 --device=/dev/usb/lp0 --restart=always --platform linux/arm/v7 --privileged fiddep/unifi-voucher-service:latest
 
 ### Debug
 

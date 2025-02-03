@@ -56,32 +56,37 @@ $wlan_array = $unifi_connection->list_wlanconf();
         }
     }
 
-// Time to collect all information and limits
-$t1 = $vouchers[0]->code;
-$t1 = substr($t1,0,5) . "-" . substr($t1,5,5);
-$t2 = $uvs_upload . " " . $vouchers[0]->qos_rate_max_up . " " . $uvs_uprate;
-$t3 = $uvs_download . " " . $vouchers[0]->qos_rate_max_down . " " . $uvs_uprate;
-$t4 = $uvs_expiration ." " . (($vouchers[0]->duration) / 1440) . " " . $uvs_days;
-$t5 = $vouchers[0]->note;
-$t6 = $uvs_quota ." ". $vouchers[0]->quota . " " . $uvs_usages;
-$t7 = $uvs_wifissid . " " . $wlan_ssid;
-$t8 = (date("d.m.Y", $vouchers[0]->create_time) . " at " . date("h:iA", $vouchers[0]->create_time));
+    try{
 
-// Create the image to print
-create_printimage($t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8);
+        // Time to collect all information and limits
+        $t1 = $vouchers[0]->code;
+        $t1 = substr($t1,0,5) . "-" . substr($t1,5,5);
+        $t2 = $uvs_upload . " " . $vouchers[0]->qos_rate_max_up . " " . $uvs_uprate;
+        $t3 = $uvs_download . " " . $vouchers[0]->qos_rate_max_down . " " . $uvs_uprate;
+        $t4 = $uvs_expiration ." " . (($vouchers[0]->duration) / 1440) . " " . $uvs_days;
+        $t5 = $vouchers[0]->note;
+        $t6 = $uvs_quota ." ". $vouchers[0]->quota . " " . $uvs_usages;
+        $t7 = $uvs_wifissid . " " . $wlan_ssid;
+        $t8 = (date("d.m.Y", $vouchers[0]->create_time) . " at " . date("h:iA", $vouchers[0]->create_time));
+        
+        // Create the image to print
+        create_printimage($t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8);
+        
+        // Composition of some outlines and all voucher information
+        shell_exec( "/usr/bin/convert ../codeimage/voucher.png ../codeimage/outlines.png -composite ../codeimage/voucher_final.png" );
+        
+        // To get rid of some ASCII issues with python
+        setlocale(LC_ALL,"C.UTF-8");
+        putenv("LC_ALL=C.UTF-8");
+        putenv("LANG=C.UTF-8");
+        
+        // Collect all information and send the print command
+        shell_exec("brother_ql -p " . $uvs_usbid . " -m " . $uvs_printer . " print -l " . $uvs_labelsize . " /var/www/html/" . $uvs_folder . "/codeimage/voucher_final.png");
+    }catch(Exception $e){
+    }finally{
+        // Reload the page after the print was successful
+        echo "<script type=\"text/javascript\">setTimeout(\"document.location.reload();\",3000);</script>";
+    }
 
-// Composition of some outlines and all voucher information
-shell_exec( "/usr/bin/convert ../codeimage/voucher.png ../codeimage/outlines.png -composite ../codeimage/voucher_final.png" );
-
-// To get rid of some ASCII issues with python
-setlocale(LC_ALL,"C.UTF-8");
-putenv("LC_ALL=C.UTF-8");
-putenv("LANG=C.UTF-8");
-
-// Collect all information and send the print command
-shell_exec("brother_ql -p " . $uvs_usbid . " -m " . $uvs_printer . " print -l " . $uvs_labelsize . " /var/www/html/" . $uvs_folder . "/codeimage/voucher_final.png");
-
-// Reload the page after the print was successful
-echo "<script type=\"text/javascript\">setTimeout(\"document.location.reload();\",3000);</script>";
 
 ?>

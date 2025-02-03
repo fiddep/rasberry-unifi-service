@@ -13,9 +13,9 @@
  * Copy this file to your working directory, rename it to config.php and update the section below with your UniFi
  * controller details and credentials
  */
-$controlleruser     = 'RLadmin'; // the user name for access to the UniFi Controller
-$controllerpassword = 'Abcd1234'; // the password for access to the UniFi Controller
-$controllerurl      = 'https://192.168.90.2'; // full url to the UniFi Controller, eg. 'https://22.22.11.11:8443'
+$controlleruser     = 'test'; // the user name for access to the UniFi Controller
+$controllerpassword = 'Dreamweaver123'; // the password for access to the UniFi Controller
+$controllerurl      = 'https://192.168.1.1'; // full url to the UniFi Controller, eg. 'https://22.22.11.11:8443'
 $controllerversion  = '9.0.108'; // the version of the Controller software, eg. '4.6.6' (must be at least 4.0.0)
 
 /**
